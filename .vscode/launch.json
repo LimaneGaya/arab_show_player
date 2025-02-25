@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib/write_file.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/write_file.dart"
+        }
+    ]
+}
