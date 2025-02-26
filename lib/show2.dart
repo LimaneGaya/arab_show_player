@@ -11,26 +11,18 @@ List<Show2> back(String s) {
 class Episode {
   final String episode;
   final String? watchLink;
-  final String? videoSource;
   bool watched = false;
   Episode(
     this.episode,
-    this.watchLink,
-    this.videoSource, [
+    this.watchLink, [
     this.watched = false,
   ]);
   factory Episode.fromJson(dynamic json) {
     switch (json) {
-      case {
-        "episode_link": String e,
-        "watch_link": String w,
-        "video_src": String v,
-      }:
-        return Episode(e, w, v);
       case {"episode_link": String e, "watch_link": String w}:
-        return Episode(e, w, null);
+        return Episode(e, w);
       case {"episode_link": String e}:
-        return Episode(e, null, null);
+        return Episode(e, null);
     }
 
     throw Exception('Could not convert to class Episode');

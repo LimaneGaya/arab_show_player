@@ -55,11 +55,7 @@ class _Show2EpisodesState extends State<Show2Episodes> {
         itemBuilder: (context, index) {
           final ep = widget.episodes[index];
           final color =
-              ep.videoSource != null
-                  ? Colors.white
-                  : ep.watchLink != null
-                  ? Colors.red.shade300
-                  : Colors.red.shade900;
+              ep.watchLink != null ? Colors.white : Colors.red.shade900;
           final number =
               ep.episode
                   .split('/')
@@ -68,14 +64,13 @@ class _Show2EpisodesState extends State<Show2Episodes> {
                   .replaceFirst('-', '')
                   .trim();
           return InkWell(
-            onLongPress: (){
-              if (ep.watchLink != null) {
-                setWatched(ep);
-                launchUrl(
-                  Uri.parse(ep.watchLink!),
-                  mode: LaunchMode.externalApplication,
-                );
-              }
+            onLongPress: () {
+              if (ep.watchLink == null) return;
+              setWatched(ep);
+              launchUrl(
+                Uri.parse(ep.watchLink!),
+                mode: LaunchMode.externalApplication,
+              );
             },
             onTap: () async {
               if (ep.watchLink == null) {
@@ -87,19 +82,20 @@ class _Show2EpisodesState extends State<Show2Episodes> {
               }
               final link = await extractVideoSource(ep.watchLink!);
               if (link == null) {
+                setWatched(ep);
                 launchUrl(
                   Uri.parse(ep.watchLink!),
                   mode: LaunchMode.externalApplication,
                 );
-                setWatched(ep);
                 return;
               }
+              if (!context.mounted) return;
+              setWatched(ep);
               await Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => VideoPlayerScreen(link),
                 ),
               );
-              setWatched(ep);
             },
             child: ColoredBox(
               color:

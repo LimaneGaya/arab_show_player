@@ -84,8 +84,8 @@ class _ShowList2State extends State<ShowList2> {
                 children: [
                   CachedNetworkImage(imageUrl: s.image, fit: BoxFit.cover),
                   Positioned(
-                    top: 10,
-                    left: 10,
+                    top: 5,
+                    left: 5,
                     child: Text(
                       s.length.toString(),
                       textScaler: TextScaler.noScaling,
@@ -102,7 +102,7 @@ class _ShowList2State extends State<ShowList2> {
                   ),
                   Positioned(
                     top: 5,
-                    right: 10,
+                    right: 0,
                     child: IconButton(
                       onPressed: () {
                         likedShows.contains(s.name)
@@ -118,34 +118,43 @@ class _ShowList2State extends State<ShowList2> {
                       color: Colors.red,
                     ),
                   ),
-                  Positioned(
-                    bottom: 70,
-                    right: 10,
-                    child: IconButton(
-                      onPressed:
-                          () => launchUrl(
-                            Uri.parse(s.url),
-                            mode: LaunchMode.externalApplication,
-                          ),
-                      icon: Icon(Icons.open_in_browser),
-                      iconSize: 30,
-                      color: Colors.red,
+                  Align(
+                    alignment: Alignment.centerRight,
+
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: IconButton.filled(
+                        onPressed:
+                            () => launchUrl(
+                              Uri.parse(s.url),
+                              mode: LaunchMode.externalApplication,
+                            ),
+                        icon: Icon(Icons.open_in_browser),
+                        iconSize: 30,
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                        ),
+                        color: Colors.black.withAlpha(240),
+                      ),
                       padding: EdgeInsets.all(5),
-                      height: 50,
-                      color: Colors.black.withAlpha(230),
                       child: Text(
                         s.name,
                         textScaler: TextScaler.noScaling,
                         textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
+                          fontSize: 33,
                           color: Colors.white,
-                          fontSize: 15,
-                          letterSpacing: -1,
+                          letterSpacing: -1.5,
                         ),
                       ),
                     ),
