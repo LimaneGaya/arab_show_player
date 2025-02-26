@@ -18,6 +18,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.gaya.shows_for_mother"
@@ -28,6 +29,7 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
